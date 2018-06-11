@@ -46,10 +46,10 @@ to see [phpinfo()](http://php.net/manual/en/function.phpinfo.php).
 or [http://localhost/phpmyadmin/](http://localhost/phpmyadmin/)
 
 ##### - Shared folder
-The `www` folder is a shared folder synced with `/var/www/html` in ubuntu virtual machine that correspond to default root folder of the web server.
+The `www` folder is a shared folder synced with `/var/www/html` in ubuntu virtual machine that corresponds to the default root folder of the web server.
 
-*Is possible access to database from a desktop client such as Sequel Pro or HeidiSQL.
-Remind you need ssh tunneling.*
+*It's possible access to the database from a desktop client such as Sequel Pro or HeidiSQL.
+Keep in mind that you need ssh tunneling.*
 
 ## In the box
 - Ubuntu-18.04 (live-server-amd64)
@@ -76,7 +76,7 @@ Remind you need ssh tunneling.*
 > user: root  
 > password: root
 
-*Note: vagrantdb is an user with all privileges on vagrantdb, this for avoid conflict problem with phpmyadmin and access to it.*
+*Note: vagrantdb is an user with all the privileges on vagrantdb, this is needed to avoid conflict problem with the phpmyadmin access.*
 
 ## References
  - [What is VirtualBox?](https://www.virtualbox.org/manual/ch01.html "VirtualBox Doc")
