@@ -5,7 +5,7 @@ LAMP-NodeJS provide Ubuntu 18.04, Apache, PHP7.1, MySQL, phpMyAdmin and NodeJS i
 
 Be sure to install [VirtualBox](https://www.virtualbox.org/wiki/Downloads), [Vagrant](https://www.vagrantup.com/downloads.html) and optionally [Git](https://git-scm.com/downloads).
 
-## First time initialization:
+## First time initialization
 
 #### From command line
 ```
@@ -46,10 +46,10 @@ to see [phpinfo()](http://php.net/manual/en/function.phpinfo.php).
 or [http://localhost/phpmyadmin/](http://localhost/phpmyadmin/)
 
 ##### - Shared folder
-The `www` folder is a shared folder synced with `/var/www/html` in ubuntu virtual machine that correspond to default root folder of the web server.
+The `www` folder is a shared folder synced with `/var/www/html` and `/vagrant/www/` in ubuntu virtual machine that corresponds to the default root folder of the web server.
 
-*Is possible access to database from a desktop client such as Sequel Pro or HeidiSQL.
-Remind you need ssh tunneling.*
+*It's possible access to the database from a desktop client such as Sequel Pro or HeidiSQL.
+Keep in mind that you need ssh tunneling.*
 
 ## In the box
 - Ubuntu-18.04 (live-server-amd64)
@@ -60,7 +60,7 @@ Remind you need ssh tunneling.*
 - Node.js LTS (8.x)
 - npm included with Node.js LTS ([more info](https://nodejs.org/en/download/ "NodeJS"))
 
-## Default Credential:  
+## Default Credential  
 
 #### - Ubuntu Root Login
 > root: vagrant  
@@ -76,7 +76,26 @@ Remind you need ssh tunneling.*
 > user: root  
 > password: root
 
-*Note: vagrantdb is an user with all privileges on vagrantdb, this for avoid conflict problem with phpmyadmin and access to it.*
+*Note: vagrantdb is an user with all the privileges on vagrantdb, this is needed to avoid conflict problem with the phpmyadmin access.*
+
+## Troubleshoot
+
+#### - nodejs and/or npm are not correctly installed
+perform a new provision with:
+```
+$ vagrant provision
+```
+#### - npm install error and `EPROTO: protocol error, symlink`
+It's not possible to translate symlinks in the synced folder on Windows. To prevent this issue, run:
+```
+$ npm install --no-bin-links
+```
+[Official Docs](https://docs.npmjs.com/cli/install "npm-install")
+#### - Unable to access to a specific port on localhost (e.g. port 3000 for express).
+If you want to access to a specific URL on a determined port on the localhost through your default browser, it's necessary forwarding that choosen port from the VM to the OS. The way to go for it is simple, just add the following string into **Vagrantfile**, after all the other forwarded ports:
+```
+config.vm.network "forwarded_port", guest: 3000, host: 3000
+```
 
 ## References
  - [What is VirtualBox?](https://www.virtualbox.org/manual/ch01.html "VirtualBox Doc")
